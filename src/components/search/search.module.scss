@@ -1,0 +1,61 @@
+@use '../../styles/colors.scss' as *;
+@use '../../styles/fonts.scss' as *;
+
+.inputcontainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.searchinput {
+    border: 1px solid $black;
+    padding: 12px;
+    border-radius: 5px;
+    outline: none;
+    font-size: $extralarge;
+    width: 40%;
+}
+
+.searchcover {
+    position: relative;
+}
+
+.serachiconcontainer {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    padding: 14.8px;
+    background-color: $black;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    .searchinput {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .searchinput {
+        width: 100%;
+        font-size: $large;
+    }
+
+    .serachiconcontainer {
+        right: 6px;
+        top: 6px;
+        width: 48px;
+        padding: 10px;
+    }
+}
+
+
+
+
+
+

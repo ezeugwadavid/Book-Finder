@@ -1,0 +1,22 @@
+.imageoverlay {
+    height: 60vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagecontainer {
+    display: inline-block;
+    background-image: url("https://img.freepik.com/free-vector/thoughtful-woman-with-laptop-looking-big-question-mark_1150-39362.jpg?w=740&t=st=1670712953~exp=1670713553~hmac=34979537a518244415fab8c13b3beb4fb7ea7c1ed3a6f992c525ed2c5c311ee6");
+    background-size: cover;
+    background-position: center;
+    width: 40vh;
+    height: 40vh;
+}
+
+.imagetext {
+    font-size: 25px;
+    color: #2f8e89;
+}

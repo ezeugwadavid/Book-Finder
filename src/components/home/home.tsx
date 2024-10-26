@@ -99,7 +99,7 @@ const Home: React.FC = () => {
           );
         })}
       </div>
-
+     { books.length > 0 &&
       <div className={styles.paginatecontainer}>
         <ReactPaginate
           breakLabel="..."
@@ -123,6 +123,7 @@ const Home: React.FC = () => {
           page {currentPage} of {pageCount}
         </div>
       </div>
+       }
     </div>
   );
 };

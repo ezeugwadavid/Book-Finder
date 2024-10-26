@@ -38,7 +38,7 @@ const BookCard: React.FC<BookObject> = ({
           <span className={styles.desctitle}>Title:</span> {title}
         </div>
         <div className={styles.bookauthor}>
-          <span className={styles.desctitle}>Author:</span> {authors}
+          <span className={styles.desctitle}>Author:</span> {authors?.join(', ')}
         </div>
         <div className={styles.pubdate}>
           <span className={styles.desctitle}>Publication Date:</span>{" "}

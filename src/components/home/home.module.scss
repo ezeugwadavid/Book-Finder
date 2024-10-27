@@ -59,7 +59,6 @@
     width: 20%;
     margin-left: auto;
     margin-right: auto;
-
 }
 
 .controlbtn {
@@ -94,15 +93,26 @@
 }
 
 @media screen and (max-width: 600px) {
+    .homecontainer {
+        padding: 60px 30px;
+    }
+
     .bookscontainer {
         grid-template-columns: 100%;
     };
 
     .paginatecontainer {
-        max-width: 95%;
+        max-width: 100%;
         margin: 50px auto;
     }
+
+    .currentpage {
+        bottom: 40px;
+        width: 50%;
+    }
+
 }
+
 
 
 

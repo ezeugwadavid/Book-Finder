@@ -3,7 +3,7 @@
 The **Book Finder App** is a dynamic and user-friendly web application that allows users to search for books in real-time. Built with React and TypeScript, this app utilizes the Google Books API to deliver comprehensive book search functionality. As users type in the search input, relevant book results are fetched and displayed instantly, making it easy to discover new reads.
 
 ## Site is live at:
-https://book-finder.netlify.app/
+https://book-finder-pearl-one.vercel.app/
 
 ## Features
 

@@ -26,5 +26,5 @@ export interface GoogleBookApiResponse {
 }
 
 export interface BookSearchProps {
-  handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
+  handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }

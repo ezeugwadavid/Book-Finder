@@ -1,8 +1,18 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Home from './src/components/home/home';
-import * as api from './src/services/apis'; 
+import * as api from './src/services/apis';
+import * as debounceUtil from './src/utils/debounce';  
 
 jest.mock('./src/services/apis'); // Mock the entire module
+
+// Mock debounce to instantly call the function without delay
+jest.mock('./src/utils/debounce', () => ({
+  debounce: (fn: any) => {
+    const debouncedFn = (...args: any[]) => fn(...args);
+    debouncedFn.cancel = jest.fn();
+    return debouncedFn;
+  },
+}));
 
 describe('Home', () => {
   it('fetches and displays books based on search query', async () => {

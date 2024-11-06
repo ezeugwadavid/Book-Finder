@@ -12,6 +12,7 @@ import {
 } from "../../interfaces/bookinterface";
 import { searchBooks } from "../../services/apis";
 import withHome from "./homeHoc";
+import { debounce } from "../../utils/debounce";
 
 const EnhancedBookCard = withHome(BookCard);
 
@@ -23,6 +24,7 @@ const Home: React.FC = () => {
   const [currentItems, setCurrentItems] = useState<BookObject[]>([]);
   const [pageCount, setPageCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const itemsPerPage = 10;
 
@@ -33,10 +35,8 @@ const Home: React.FC = () => {
     setCurrentPage(event.selected + 1);
   };
 
-  //calls the search api as soon as a user starts typing in the search input
-  const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    const results = await searchBooks(value.trim());
+  const fetchBooks = async (query: string) => {
+    const results = await searchBooks(query.trim());
     const formattedBooks: BookObject[] = results.map(
       (book: GoogleBookApiResponse) => ({
         id: book.id,
@@ -53,10 +53,27 @@ const Home: React.FC = () => {
     setBooks(formattedBooks);
   };
 
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
   const toggle = (id: string) => {
     setBookId(id);
     setIsOpen(!isOpen);
   };
+
+  // Debounce effect for search input
+  useEffect(() => {
+    const debouncedFetch = debounce(fetchBooks, 1000);
+    if (searchQuery) {
+      debouncedFetch(searchQuery);
+    }
+
+    // Clean up the debounce on unmount
+    return () => {
+      debouncedFetch.cancel?.();
+    };
+  }, [searchQuery]);
 
   //Does pagination calculations
   useEffect(() => {
@@ -102,31 +119,31 @@ const Home: React.FC = () => {
           );
         })}
       </div>
-     { books.length > 0 &&
-      <div className={styles.paginatecontainer}>
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel={
-            <img className={styles.controlbtn} src={RightButton} alt="" />
-          }
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
-          pageCount={pageCount}
-          previousLabel={
-            <img className={styles.controlbtn} src={LeftButton} alt="" />
-          }
-          renderOnZeroPageCount={null}
-          containerClassName={styles.controls}
-          pageLinkClassName={styles.pagelink}
-          previousLinkClassName="prev"
-          nextLinkClassName="prev"
-          activeLinkClassName="highlight"
-        />
-        <div className={styles.currentpage}>
-          page {currentPage} of {pageCount}
+      {books.length > 0 && (
+        <div className={styles.paginatecontainer}>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel={
+              <img className={styles.controlbtn} src={RightButton} alt="" />
+            }
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={pageCount}
+            previousLabel={
+              <img className={styles.controlbtn} src={LeftButton} alt="" />
+            }
+            renderOnZeroPageCount={null}
+            containerClassName={styles.controls}
+            pageLinkClassName={styles.pagelink}
+            previousLinkClassName="prev"
+            nextLinkClassName="prev"
+            activeLinkClassName="highlight"
+          />
+          <div className={styles.currentpage}>
+            page {currentPage} of {pageCount}
+          </div>
         </div>
-      </div>
-       }
+      )}
     </div>
   );
 };

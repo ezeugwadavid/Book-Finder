@@ -11,6 +11,9 @@ import {
   GoogleBookApiResponse,
 } from "../../interfaces/bookinterface";
 import { searchBooks } from "../../services/apis";
+import withHome from "./homeHoc";
+
+const EnhancedBookCard = withHome(BookCard);
 
 const Home: React.FC = () => {
   const [bookid, setBookId] = useState("");
@@ -84,7 +87,7 @@ const Home: React.FC = () => {
               className={styles.bookitem}
               onClick={() => toggle(id)}
             >
-              <BookCard
+              <EnhancedBookCard
                 id={id}
                 title={title}
                 authors={authors}
